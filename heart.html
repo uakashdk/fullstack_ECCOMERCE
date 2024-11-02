@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running Crying Boy</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .boy {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: run 8s infinite linear;
+        }
+
+        /* Head */
+        .head {
+            width: 60px;
+            height: 60px;
+            background-color: #f1c27d;
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* Eyes */
+        .eye {
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            border-radius: 50%;
+            position: absolute;
+            top: 18px;
+        }
+
+        .eye.left {
+            left: 15px;
+        }
+
+        .eye.right {
+            right: 15px;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Tears */
+        .tear {
+            width: 4px;
+            height: 12px;
+            background-color: #00aaff;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            animation: tear-drop 1.5s infinite;
+            opacity: 0.8;
+        }
+
+        .tear.left {
+            left: 18px;
+            animation-delay: 0.5s;
+        }
+
+        .tear.right {
+            right: 18px;
+        }
+
+        @keyframes tear-drop {
+            0% { transform: translateY(0); opacity: 0.8; }
+            70% { opacity: 1; }
+            100% { transform: translateY(30px); opacity: 0; }
+        }
+
+        /* Body */
+        .body {
+            width: 35px;
+            height: 70px;
+            background-color: #0074D9;
+            border-radius: 10px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        /* Arms */
+        .arm {
+            width: 10px;
+            height: 45px;
+            background-color: #0074D9;
+            position: absolute;
+            top: 10px;
+            transform-origin: top;
+        }
+
+        .arm.left {
+            left: -15px;
+        }
+
+        .arm.right {
+            right: -15px;
+
+        }
+
+        @keyframes leg-run {
+            0% { transform: rotate(15deg); }
+            100% { transform: rotate(-15deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="boy">
+            <!-- Head -->
+            <div class="head">
+                <!-- Eyes -->
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <!-- Tears -->
+                <div class="tear left"></div>
+                <div class="tear right"></div>
+            </div>
+            
+            <!-- Body -->
+            <div class="body">
+                <a href="./heartbreak.html">❤️</a>
+                <!-- Arms -->
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+            </div>
+            
+            <!-- Legs -->
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+        </div>
+    </div>
+</body>
+</html>
