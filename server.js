@@ -7,43 +7,49 @@ import authRoutes from "./routes/AuthRoute.js";
 import categoryRoutes from "./routes/CategoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
-//configure env
+// Configure environment variables
 dotenv.config();
 
-//databse config
+// Database configuration
 connectDB();
 
-//rest object
+// Rest object
 const app = express();
 
-//middelwares
+// Middlewares
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests from the frontend
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000", // Allow requests from the frontend
     credentials: true,
   })
 );
 app.use(express.json());
 app.use(morgan("dev"));
 
-//routes
+// Resolve __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+
+// Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
-//rest api
-app.get("/", (req, res) => {
-  res.send("<h1>Welcome to ecommerce app</h1>");
+// Handle all other requests
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
 });
 
-//PORT
+// PORT
 const PORT = process.env.PORT || 8080;
 
-//run listen
+// Run server
 app.listen(PORT, () => {
-  console.log(
-    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
-      .white
-  );
+  const mode =
+    process.env.NODE_ENV === "production" ? "production" : "development";
+  console.log(`Server running in ${mode} mode on port ${PORT}`.bgCyan.white);
 });
